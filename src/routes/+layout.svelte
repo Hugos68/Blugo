@@ -3,7 +3,7 @@
 	import '@skeletonlabs/skeleton/styles/all.css';
 	import '../app.postcss';
 
-	import { AppShell, AppBar, LightSwitch, Drawer } from '@skeletonlabs/skeleton';
+	import { AppShell, AppBar, LightSwitch, Drawer, Avatar, menu } from '@skeletonlabs/skeleton';
 	import { drawerStore } from '@skeletonlabs/skeleton';
 	import type {DrawerSettings} from '@skeletonlabs/skeleton/utilities/Drawer/types';
 
@@ -21,20 +21,31 @@
 
 <AppShell>
 	<svelte:fragment slot="header">
-		<AppBar class="px-[5vw]">
+		<AppBar class="px-[5vw] h-18">
 			<svelte:fragment slot="lead">
 				<a class="text-2xl" href="/home">Blugo</a>
 			</svelte:fragment>
-				<nav class="flex px-4 gap-4">
-					<a class="hidden md:block" href="/blog">Blog</a>
+				<nav class="flex">
+					<a class="px-4 hidden md:block" href="/blog">Blog</a>
 				</nav>
 			<svelte:fragment slot="trail">
-				<a class="btn btn-ghost-secondary hidden md:block" href="/login">Login</a>
-				<a class="btn btn-ghost-secondary hidden md:block" href="/register">Join us!</a>
-				<span class="hidden md:block">
+				<span class="px-4 hidden md:block">
 					<LightSwitch />
 				</span>
-				<button class="btn btn-ghost-secondary btn-sm md:hidden" on:click={openHamburger}>
+				<span class="relative">
+					<button use:menu={{ menu: 'account' }}>
+						<Avatar class="w-8" initials="JD" />
+					</button>
+					<div class="p-4 bg-surface-400-500-token rounded-lg" data-menu="account">
+						<a class="btn btn-ghost-secondary" href="/account">Account</a>
+						
+						<div class="flex">
+							<a class="btn btn-ghost-secondary hidden md:block" href="/connect?type=login">Login</a>
+							<a class="btn btn-ghost-secondary hidden md:block" href="/register?type=register">Join us!</a>
+						</div>
+					</div>
+				</span>
+				<button class="btn md:hidden" on:click={openHamburger}>
 					<svg class="h-8 w-8" viewBox="0 0 48 48"><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="M7.94971 11.9497H39.9497"/><path d="M7.94971 23.9497H39.9497"/><path d="M7.94971 35.9497H39.9497"/></g></svg>
 				</button>
 			</svelte:fragment>
@@ -51,11 +62,7 @@
 	<Transitioned>
 		<slot />
 	</Transitioned>
-	
 
-
-	<!-- ---- / ---- -->
-	<svelte:fragment slot="footer">Footer</svelte:fragment>
 </AppShell>
 
 
