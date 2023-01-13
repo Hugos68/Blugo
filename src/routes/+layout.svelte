@@ -26,8 +26,8 @@
 </script>
 
 <!-- This key block fixes the scroll bug where the scroll to top isnt applied when navigating client side -->
+<Toast />
 {#key $page.route.id}
-	<Toast />
 	<AppShell>
 		<svelte:fragment slot="header"><Header /></svelte:fragment>
 		<svelte:fragment slot="sidebarRight"><Sidebar /></svelte:fragment>

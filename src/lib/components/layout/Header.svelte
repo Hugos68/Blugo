@@ -14,7 +14,7 @@
         drawerStore.open(settings);
 	}
 
-    const logout = () => {
+    const submitLogout = () => {
         return async ({ result }: ActionResult) => {        
             await applyAction(result);
             if (result.type==='redirect') {
