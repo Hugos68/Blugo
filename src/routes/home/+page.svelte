@@ -1,5 +1,5 @@
-<script>
-     
+<script lang="ts">
+	import { page } from "$app/stores";
 </script>
 
 <main class="flex flex-col gap-[50vh]">
@@ -7,7 +7,7 @@
         <h1 class="text-[clamp(2rem,10vw,7.5rem)] leading-loose">Welcome to Blugo!</h1>
         <p>The Modern Blog</p>
         <div class="flex gap-6 mt-12">
-            <a href="/register" class="btn btn-filled lg:btn-lg">Get started</a>
+            <a href="{$page.data.session ? "/blog" : "/register"}" class="btn btn-filled lg:btn-lg">Get started</a>
             <a href="/home#about" class="btn btn-outline lg:btn-lg">Learn more</a>
         </div>
     </section>
