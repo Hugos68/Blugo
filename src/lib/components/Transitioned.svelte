@@ -5,7 +5,7 @@
     let mounted = false;
     onMount(() => {mounted=true})
 
-    export let classes;
+    export let classes: string;
 </script>
 
 {#if mounted}
