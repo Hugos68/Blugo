@@ -1,41 +1,32 @@
 <script lang="ts">
-	import { applyAction, enhance, type SubmitFunction } from "$app/forms";
+	import { applyAction, enhance } from "$app/forms";
+	import { invalidateAll } from "$app/navigation";
 	import { toastStore } from "@skeletonlabs/skeleton/utilities/Toast/stores";
 	import type { ToastSettings } from "@skeletonlabs/skeleton/utilities/Toast/types";
 	import type { ActionResult } from "@sveltejs/kit";
 
     const submitLogin = () => {
-        return async (result: ActionResult) => {
+        return async ({ result }: ActionResult) => {        
             await applyAction(result);
             if (result.type==='redirect') {
                 const t: ToastSettings = {
-                    message: '👋 Hello and welcome to Skeleton.',
+                    message: 'Success! Logging you in...',
                     // Optional: Presets for primary | secondary | tertiary | warning
                     preset: 'success',
                     // Optional: The auto-hide settings
                     autohide: true,
-                    timeout: 5000,
-                    // Optional: Adds a custom action button
-                    action: {
-                        label: 'Greeting',
-                        response: () => alert('Hello, Skeleton')
-                    }
+                    timeout: 3500,
                 };
                 toastStore.trigger(t);
             }
-            else if (result.type==='error') {
+            else if (result.type==='failure') {      
                 const t: ToastSettings = {
-                    message: '👋 Hello and welcome to Skeleton.',
+                    message: result.data.message,
                     // Optional: Presets for primary | secondary | tertiary | warning
-                    preset: 'success',
+                    preset: 'error',
                     // Optional: The auto-hide settings
                     autohide: true,
-                    timeout: 5000,
-                    // Optional: Adds a custom action button
-                    action: {
-                        label: 'Greeting',
-                        response: () => alert('Hello, Skeleton')
-                    }
+                    timeout: 3500,
                 };
                 toastStore.trigger(t);
             }

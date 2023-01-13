@@ -17,7 +17,7 @@ export const redirectToLocaLhost = (async ({ event, resolve }) => {
 
 // Function to prevent users landing on the root page '/' which doesnt specify where they are unlike '/home'
 export const redirectToHome = (async ({ event, resolve }) => {
-    const url = new URL(event.request.url)
+    const url = new URL(event.request.url);
     if (url.pathname==='/') {
         url.pathname = '/home'
         return Response.redirect(url.toString(), 302)
@@ -32,5 +32,19 @@ export const handleAuth = (async ({ event, resolve }) => {
     return resolve(event);
 }) satisfies Handle;
 
+export const handleAuthRouting = (async ({ event, resolve }) => {
+    const url = new URL(event.request.url);
+    const loggedIn = event.locals.session;
+    if (loggedIn && (url.pathname==='/login' || url.pathname==='/register')) {
+        url.pathname = '/home'
+        return Response.redirect(url.toString(), 302)
+    }
+    else if (!loggedIn && (url.pathname==='/account' || url.pathname==='/blog')) {
+        url.pathname = '/login'
+        return Response.redirect(url.toString(), 302)
+    }
+    return resolve(event);
+}) satisfies Handle;
 
-export const handle: Handle = sequence(redirectToLocaLhost, redirectToHome, handleAuth)
+
+export const handle: Handle = sequence(redirectToLocaLhost, redirectToHome, handleAuth, handleAuthRouting)

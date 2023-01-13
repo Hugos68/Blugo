@@ -1,17 +1,46 @@
 <script lang="ts">
+	import { applyAction, enhance } from "$app/forms";
 	import { page } from "$app/stores";
-	import { AppBar, Avatar, drawerStore, LightSwitch, menu, type DrawerSettings } from "@skeletonlabs/skeleton";
+	import { AppBar, Avatar, drawerStore, LightSwitch, menu, toastStore, type DrawerSettings, type ToastSettings } from "@skeletonlabs/skeleton";
 
-	$: loggedIn = $page.data.session;
+	$: loggedIn = $page.data.session!==null;
 
     function openHamburger(): void {
-	const settings: DrawerSettings = {
-		position: 'right',
-		width: 'w-[min(25rem,65vw)]',
-		blur: 'backdrop-blur-sm'
-	};
-	drawerStore.open(settings);
+        const settings: DrawerSettings = {
+            position: 'right',
+            width: 'w-[min(25rem,65vw)]',
+            blur: 'backdrop-blur-sm'
+        };
+        drawerStore.open(settings);
 	}
+
+    const logout = () => {
+        return async ({ result }: ActionResult) => {        
+            await applyAction(result);
+            if (result.type==='redirect') {
+                const t: ToastSettings = {
+                    message: 'Success! Logging you out...',
+                    // Optional: Presets for primary | secondary | tertiary | warning
+                    preset: 'success',
+                    // Optional: The auto-hide settings
+                    autohide: true,
+                    timeout: 3500,
+                };
+                toastStore.trigger(t);
+            }
+            else if (result.type==='failure') {      
+                const t: ToastSettings = {
+                    message: result.data.message,
+                    // Optional: Presets for primary | secondary | tertiary | warning
+                    preset: 'error',
+                    // Optional: The auto-hide settings
+                    autohide: true,
+                    timeout: 3500,
+                };
+                toastStore.trigger(t);
+            }
+        }
+    }
 </script>
 <AppBar class="px-[5vw] h-16">
     <svelte:fragment slot="lead">
@@ -32,11 +61,13 @@
         {#if loggedIn}
         <span class="relative">
             <button use:menu={{ menu: 'account' }}>
-                <Avatar class="w-8" initials="JD" />
+                <Avatar class="w-[2.5rem]" initials="JD" />
             </button>
             <div class="p-4 bg-surface-400-500-token rounded-2xl" data-menu="account">
                 <a class="btn btn-ghost-secondary" href="/account">Account</a>
-                <a class="btn btn-ghost-secondary" href="/logout">Logo</a>
+                <form action="/logout" method="post" use:enhance={submitLogout}>
+                    <button type="submit" class="btn btn-ghost-secondary">Logout</button>
+                </form>
             </div>
         </span>
         {:else if !($page.route.id==='home')}
