@@ -1,12 +1,18 @@
-<script>
+<script lang="ts">
+	import { page } from '$app/stores';
     import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
     let mounted = false;
     onMount(() => {mounted=true})
+
+    export let classes;
 </script>
 
 {#if mounted}
-    <main in:fly={{y: 25, duration: 500}}>
-        <slot />
-    </main>
+    {#key $page.route.id}
+        <main class={classes} in:fly={{y: 25, duration: 500}}>
+            <slot />
+        </main>
+    {/key}
 {/if}
+

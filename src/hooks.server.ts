@@ -1,3 +1,5 @@
+import '$lib/supabase';
+import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import type { Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
  
@@ -16,8 +18,6 @@ export const redirectToLocaLhost = (async ({ event, resolve }) => {
 // Function to prevent users landing on the root page '/' which doesnt specify where they are unlike '/home'
 export const redirectToHome = (async ({ event, resolve }) => {
     const url = new URL(event.request.url)
-    console.log(url);
-    
     if (url.pathname==='/') {
         url.pathname = '/home'
         return Response.redirect(url.toString(), 302)
@@ -25,5 +25,12 @@ export const redirectToHome = (async ({ event, resolve }) => {
     return await resolve(event);
 }) satisfies Handle;
 
+export const handleAuth = (async ({ event, resolve }) => {
+    const { session, supabaseClient } = await getSupabase(event);
+    event.locals.sb = supabaseClient;
+    event.locals.session = session;
+    return resolve(event);
+}) satisfies Handle;
 
-export const handle: Handle = sequence(redirectToLocaLhost, redirectToHome)
+
+export const handle: Handle = sequence(redirectToLocaLhost, redirectToHome, handleAuth)
