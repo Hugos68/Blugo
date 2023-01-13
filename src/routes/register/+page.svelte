@@ -3,9 +3,10 @@
 	import { applyAction, enhance } from "$app/forms";
 	import { toastStore, type ToastSettings } from "@skeletonlabs/skeleton";
 	import type { ActionResult } from "@sveltejs/kit/types/internal";
+	import type { ActionData } from "./$types";
 
     const submitRegister = () => {
-        return async ({ result }: ActionResult) => {        
+        return async (result: ActionResult) => {        
             await applyAction(result);
             if (result.type==='redirect') {
                 const t: ToastSettings = {
@@ -20,7 +21,7 @@
             }
             else if (result.type==='failure') {      
                 const t: ToastSettings = {
-                    message: result.data.message,
+                    message: result.data?.message,
                     // Optional: Presets for primary | secondary | tertiary | warning
                     preset: 'error',
                     // Optional: The auto-hide settings

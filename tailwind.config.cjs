@@ -6,6 +6,7 @@ module.exports = {
 		extend: {
 			transitionProperty: {
 				'rotate': 'rotate',
+				'height': 'height',
 			  }
 		},
 	},

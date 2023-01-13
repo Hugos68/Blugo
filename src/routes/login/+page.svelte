@@ -6,7 +6,7 @@
 	import type { ActionResult } from "@sveltejs/kit";
 
     const submitLogin = () => {
-        return async ({ result }: ActionResult) => {        
+        return async (result: ActionResult) => {        
             await applyAction(result);
             if (result.type==='redirect') {
                 const t: ToastSettings = {
@@ -21,7 +21,7 @@
             }
             else if (result.type==='failure') {      
                 const t: ToastSettings = {
-                    message: result.data.message,
+                    message: result.data?.message,
                     // Optional: Presets for primary | secondary | tertiary | warning
                     preset: 'error',
                     // Optional: The auto-hide settings

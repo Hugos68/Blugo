@@ -1,8 +1,7 @@
+<script lang="ts">
+    let title: string = "";
+    let description: string = "";
+    $: startedBlog = (title || description);
 
-
-<main>
-    <form>
-        <input name="title" placeholder="Start typing something...">
-    </form>
- 
-</main>
+    // TODO: Only show description once title gets typed in (smooth transition in height for e.g)
+</script>
