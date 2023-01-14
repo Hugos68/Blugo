@@ -19,6 +19,7 @@ export const actions: Actions = {
         if (err) {
             return fail(400, {message: err.message});
         }
+        
         throw redirect(303, '/home')
     }
 }

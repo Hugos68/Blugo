@@ -21,6 +21,6 @@ export const actions: Actions = {
             return fail(400, {message: err.message});
         }
 
-        return redirect(303, '/login')
+        throw redirect(303, '/login')
     }
 }
