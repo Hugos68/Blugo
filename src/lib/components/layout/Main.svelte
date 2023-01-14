@@ -14,7 +14,7 @@
     {/key}
 {:else}
     <main class="flex justify-center">
-        <div style="border-top-color:transparent" class="w-[5vw] h-[5vw] mt-[25vh] border-4 border-surface-900-50-token border-solid rounded-full animate-spin"></div>
+        <div style="border-top-color:transparent" class="w-[clamp(2rem,5vw,3rem)] h-[clamp(2rem,5vw,3rem)] mt-[25vh] border-4 border-surface-900-50-token border-solid rounded-full animate-spin"></div>
     </main>
 {/if}
 
