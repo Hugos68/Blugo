@@ -52,7 +52,7 @@
 
 <main class="flex flex-col items-center gap-10">
     <h1 class="text-4xl">Blog</h1>
-    <section class="w-full flex justify-evenly">
+    <section class="w-full flex flex-col gap-10 lg:flex-row lg:gap-0 justify-evenly">
         <div class="flex flex-col items-center gap-4">
             <h2>Write your own:</h2>
             <form class="flex flex-col items-center gap-4" action="?/postBlog" method="post" use:enhance={postBlog}>
