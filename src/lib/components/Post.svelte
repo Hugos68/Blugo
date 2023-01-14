@@ -6,7 +6,7 @@
     <h2>{post.title}</h2>
     <p>{post.body}</p>
     <div class="mt-4 flex justify-between items-end">
-        <p>Created by: {"Author"}</p>
+        <p>Written by: {"Author"}</p>
         <div class="flex gap-2">
             <p>Up: {"10"}</p>
             <p>Down: {"2"}</p>
