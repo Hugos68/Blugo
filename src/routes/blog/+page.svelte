@@ -54,13 +54,13 @@
 
 <main class="flex flex-col items-center gap-10">
     <h1 class="text-4xl">Blog</h1>
-    <section class="w-full flex flex-col gap-10 lg:flex-row lg:gap-0 justify-evenly">
+    <section class="flex flex-col gap-10">
         <div class="flex flex-col items-center gap-4">
             <h2>Write your own:</h2>
-            <form class="flex flex-col items-center gap-4 w-[clamp(16rem,50vw,40rem)]" action="?/postBlog" method="post" use:enhance={postBlog}>
-                <input class="text-lg font-semibold px-5 py-4 mr-auto focus:[outline:none] max-w-[min(50rem,90vw)]" name="title" type="text" placeholder="Title" bind:value={title}>
+            <form class="flex flex-col items-center gap-4 w-[min(75vw,50rem)]" action="?/postBlog" method="post" use:enhance={postBlog}>
+                <input class="text-lg font-semibold px-5 py-4 focus:[outline:none]" name="title" type="text" placeholder="Title" bind:value={title}>
                 {#if startedBlog}
-                    <textarea use:autosize class="px-5 py-2 focus:[outline:none] max-w-[min(50rem,90vw)]" name="body" contenteditable bind:textContent={body} placeholder="Write your blog" transition:fade />
+                    <textarea use:autosize class="px-5 py-2 focus:[outline:none]" name="body" contenteditable bind:textContent={body} placeholder="Write your blog" transition:fade />
                     <div class="w-full flex justify-between">
                         <button on:click={discardBlog} class="btn btn-ringed-error" transition:fade>Discard</button>
                         <button type="submit" class="btn btn-ringed-success" transition:fade>Post</button>
@@ -70,7 +70,7 @@
         </div>
         <div class="flex flex-col items-center gap-4">
             <h2>Or read them:</h2>
-            <div class="flex flex-col items-center gap-2 w-[clamp(16rem,50vw,40rem)]">
+            <div class="flex flex-col gap-2 w-[min(75vw,50rem)]">
                 {#each posts as post (post.id)}
                     <div animate:flip>
                         <Post {post} /> 
