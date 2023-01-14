@@ -59,17 +59,17 @@
             <LightSwitch />
         </span>
         {#if loggedIn}
-        <span class="relative">
-            <button use:menu={{ menu: 'account' }}>
-                <Avatar class="w-[2.5rem]" initials="JD" />
-            </button>
-            <div class="p-4 bg-surface-400-500-token rounded-2xl" data-menu="account">
-                <a class="btn btn-ghost-secondary" href="/account">Account</a>
-                <form action="/logout" method="post" use:enhance={submitLogout}>
-                    <button type="submit" class="btn btn-ghost-secondary">Logout</button>
-                </form>
-            </div>
-        </span>
+            <span class="relative hidden md:block">
+                <button use:menu={{ menu: 'account' }}>
+                    <Avatar class="w-[2.5rem]" initials="JD" />
+                </button>
+                <div class="p-4 bg-surface-400-500-token rounded-2xl w-max flex flex-col gap-6" data-menu="account">
+                    <a class="btn btn-ghost-secondary" href="/account">Account</a>
+                    <form class="p-0" action="/logout" method="post" use:enhance={submitLogout}>
+                        <button type="submit" class="w-full h-full btn btn-ghost-error">Logout</button>
+                    </form>
+                </div>
+            </span>
         {:else if !($page.route.id==='home')}
             <a class="btn btn-ghost-secondary hidden md:block" href="/login">Login</a>
             <a class="btn btn-ghost-secondary hidden md:block" href="/register">Join us!</a>
