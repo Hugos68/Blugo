@@ -20,6 +20,9 @@ export const actions: Actions = {
         if (err) {
             return fail(400, {message: err.message});
         }
+        else if (data.user && data.user.identities && data.user.identities.length === 0) {
+            return fail(400, {message: 'Email already taken'});
+        } 
 
         throw redirect(303, '/login')
     }

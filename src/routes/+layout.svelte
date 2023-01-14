@@ -11,7 +11,6 @@
 	import { onMount } from 'svelte';
 	import { supabaseClient } from '$lib/supabase';
 	import { invalidateAll } from '$app/navigation';
-	import { page } from '$app/stores';
 
 	onMount(() => {
         const {
