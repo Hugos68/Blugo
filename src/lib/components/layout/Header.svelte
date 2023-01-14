@@ -18,7 +18,7 @@
             await applyAction(result);
             if (result.type==='redirect') {
                 const t: ToastSettings = {
-                    message: 'Success! Logging you out...',
+                    message: 'Successfully logged you out!',
                     // Optional: Presets for primary | secondary | tertiary | warning
                     preset: 'success',
                     // Optional: The auto-hide settings
