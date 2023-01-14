@@ -1,8 +1,16 @@
 import { fail } from "@sveltejs/kit";
+import postcss from "postcss";
 import type { Actions, PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({locals}) => {
-    const {error,data} = await locals.sb.from('Posts').select();
+    const {error,data} = await locals.sb.from('Posts').select().order('created_at', {ascending: false});
+
+    if (data) {
+        data.forEach(post => {
+           post.created_at = new Date(post.created_at); 
+        });
+    }
+    
     return {
         posts: data
     }

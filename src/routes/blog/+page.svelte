@@ -6,6 +6,7 @@
 	import { toastStore, type ToastSettings } from "@skeletonlabs/skeleton";
 	import { invalidateAll } from "$app/navigation";
     import Post from "$lib/components/Post.svelte";
+	import { flip } from "svelte/animate";
 
     export let data: PageData;
 
@@ -24,6 +25,7 @@
         return async ({result}) => {        
             await applyAction(result);
             if (result.type==='success') {
+                discardBlog();
                 await invalidateAll();
                 const t: ToastSettings = {
                     message: 'Success! Posted new blog',
@@ -55,8 +57,8 @@
     <section class="w-full flex flex-col gap-10 lg:flex-row lg:gap-0 justify-evenly">
         <div class="flex flex-col items-center gap-4">
             <h2>Write your own:</h2>
-            <form class="flex flex-col items-center gap-4" action="?/postBlog" method="post" use:enhance={postBlog}>
-                <input class="text-lg font-semibold px-5 py-4 mr-auto focus:[outline:none] w-max-w-[min(30rem,90vw)]" name="title" type="text" placeholder="Title" bind:value={title}>
+            <form class="flex flex-col items-center gap-4 w-[clamp(16rem,50vw,40rem)]" action="?/postBlog" method="post" use:enhance={postBlog}>
+                <input class="text-lg font-semibold px-5 py-4 mr-auto focus:[outline:none] max-w-[min(50rem,90vw)]" name="title" type="text" placeholder="Title" bind:value={title}>
                 {#if startedBlog}
                     <textarea use:autosize class="px-5 py-2 focus:[outline:none] max-w-[min(50rem,90vw)]" name="body" contenteditable bind:textContent={body} placeholder="Write your blog" transition:fade />
                     <div class="w-full flex justify-between">
@@ -68,9 +70,11 @@
         </div>
         <div class="flex flex-col items-center gap-4">
             <h2>Or read them:</h2>
-            <div class="flex flex-col items-center gap-2">
-                {#each posts as post}
-                    <Post {post} />
+            <div class="flex flex-col items-center gap-2 w-[clamp(16rem,50vw,40rem)]">
+                {#each posts as post (post.id)}
+                    <div animate:flip>
+                        <Post {post} /> 
+                    </div>  
                 {/each}
             </div>
         </div>

@@ -3,7 +3,7 @@ interface Post {
     title: string,
     body: string,
     author: string,
-    created_at: string,
+    created_at: Date,
     upvotes: Upvote[],
     downvotes: Downvote[],
 }
