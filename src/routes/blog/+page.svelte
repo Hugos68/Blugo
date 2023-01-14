@@ -57,12 +57,12 @@
     <section class="flex flex-col gap-10">
         <div class="flex flex-col items-center gap-4">
             <h2>Write your own:</h2>
-            <form class="flex flex-col items-center gap-4 w-[min(75vw,50rem)]" action="?/postBlog" method="post" use:enhance={postBlog}>
+            <form autocomplete="off" class="flex flex-col items-center gap-4 w-[min(75vw,50rem)]" action="?/postBlog" method="post" use:enhance={postBlog}>
                 <input class="text-lg font-semibold px-5 py-4 focus:[outline:none]" name="title" type="text" placeholder="Title" bind:value={title}>
                 {#if startedBlog}
                     <textarea use:autosize class="px-5 py-2 focus:[outline:none]" name="body" contenteditable bind:textContent={body} placeholder="Write your blog" transition:fade />
                     <div class="w-full flex justify-between">
-                        <button on:click={discardBlog} class="btn btn-ringed-error" transition:fade>Discard</button>
+                        <button type="button" on:click={discardBlog} class="btn btn-ringed-error" transition:fade>Discard</button>
                         <button type="submit" class="btn btn-ringed-success" transition:fade>Post</button>
                     </div>
                 {/if}
