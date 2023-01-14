@@ -1,12 +1,10 @@
 
 <script lang="ts">
-	import { applyAction, enhance } from "$app/forms";
+	import { applyAction, enhance, type SubmitFunction } from "$app/forms";
 	import { toastStore, type ToastSettings } from "@skeletonlabs/skeleton";
-	import type { ActionResult } from "@sveltejs/kit/types/internal";
-	import type { ActionData } from "./$types";
 
-    const submitRegister = () => {
-        return async (result: ActionResult) => {        
+    const submitRegister: SubmitFunction = () => {
+        return async ({ result }) => {        
             await applyAction(result);
             if (result.type==='redirect') {
                 const t: ToastSettings = {
@@ -36,10 +34,10 @@
 
 <main class="flex flex-col items-center">
     <h1 class="py-16">Register</h1>
-    <form class="flex flex-col items-center gap-12 w-full" action="?/register" method="post" use:enhance={()=>{submitRegister}}>
+    <form class="flex flex-col items-center gap-12 w-full" action="?/register" method="post" use:enhance={submitRegister}>
         <input class="px-5 py-2 focus:[outline:none] max-w-[min(30rem,90vw)]" placeholder="Email" type="text" name="email">
         <input class="px-5 py-2 focus:[outline:none] max-w-[min(30rem,90vw)]" placeholder="Password"type="password" name="password">
         <input class="px-5 py-2 focus:[outline:none] max-w-[min(30rem,90vw)]" placeholder="Confirm password" type="password" name="confirmPassword">
-        <button class="btn btn-surface-500-400-token" type="submit">Register</button>
+        <button class="btn btn-ghost-tertiary" type="submit">Register</button>
     </form>
 </main>

@@ -2,7 +2,6 @@
 	import { applyAction, enhance } from "$app/forms";
 	import { page } from "$app/stores";
 	import { AppBar, Avatar, drawerStore, LightSwitch, menu, toastStore, type DrawerSettings, type ToastSettings } from "@skeletonlabs/skeleton";
-
 	$: loggedIn = $page.data.session!==null;
 
     function openHamburger(): void {
@@ -15,7 +14,7 @@
 	}
 
     const submitLogout = () => {
-        return async ({ result }: ActionResult) => {        
+        return async ({ result }) => {        
             await applyAction(result);
             if (result.type==='redirect') {
                 const t: ToastSettings = {
@@ -61,7 +60,7 @@
         {#if loggedIn}
             <span class="relative hidden md:block">
                 <button use:menu={{ menu: 'account' }}>
-                    <Avatar class="w-[2.5rem]" initials="JD" />
+                    <Avatar class="w-10" initials="{$page.data.session?.user.email?.at(0)}" />
                 </button>
                 <div class="p-4 bg-surface-400-500-token rounded-2xl w-max flex flex-col gap-6" data-menu="account">
                     <a class="btn btn-ghost-secondary" href="/account">Account</a>
