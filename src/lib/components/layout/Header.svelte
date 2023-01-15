@@ -58,8 +58,8 @@
         <nav class="flex items-center gap-4">
             {#if loggedIn}
                 <span class="relative hidden md:block">
-                    <button use:menu={{ menu: 'account' }}>
-                        <Avatar border="on" class="w-10" initials="{$page.data.session?.user.email?.at(0)}" />
+                    <button class="flex justify-center items-center" use:menu={{ menu: 'account' }}>
+                        <Avatar on border="on" class="w-10" initials="{$page.data.session?.user.email?.at(0)}" />
                     </button>
                     <div class="p-4 bg-surface-300-600-token rounded-[var(--theme-rounded-base)] flex flex-col" data-menu="account">
                         <a class="btn btn-ghost-secondary" href="/account">Account</a>
