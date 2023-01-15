@@ -1,8 +1,8 @@
 <script lang="ts">
-	import '@skeletonlabs/skeleton/themes/theme-modern.css';
+	import '../theme.css';
+	
 	import '@skeletonlabs/skeleton/styles/all.css';
 	import '../app.postcss';
-
 	import { AppShell, Toast} from '@skeletonlabs/skeleton';
 	import Header from '$lib/components/layout/Header.svelte';
 	import Sidebar from '$lib/components/layout/Sidebar.svelte';

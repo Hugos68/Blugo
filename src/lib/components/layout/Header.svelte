@@ -68,8 +68,8 @@
                     </div>
                 </span>
             {:else if !($page.route.id==='home')}
-                <a class="btn btn-ghost-secondary hidden md:block" href="/login">Login</a>
-                <a class="btn btn-ghost-secondary hidden md:block" href="/register">Join us!</a>
+                <a class="btn bg-primary-400-500-token hidden md:block" href="/login">Login</a>
+                <a class="btn bg-tertiary-400-500-token hidden md:block" href="/register">Join us!</a>
             {/if}
             <span class="h-8 w-0.5 bg-surface-300-600-token hidden md:block" />
             <span class="hidden md:block">

@@ -38,6 +38,6 @@
         <input class="px-5 py-2 focus:[outline:none] max-w-[min(30rem,90vw)]" placeholder="Email" type="text" name="email">
         <input class="px-5 py-2 focus:[outline:none] max-w-[min(30rem,90vw)]" placeholder="Password"type="password" name="password">
         <input class="px-5 py-2 focus:[outline:none] max-w-[min(30rem,90vw)]" placeholder="Confirm password" type="password" name="confirmPassword">
-        <button class="btn btn-ghost-tertiary" type="submit">Register</button>
+        <button class="btn bg-tertiary-400-500-token" type="submit">Register</button>
     </form>
 </main>
