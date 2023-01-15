@@ -23,7 +23,6 @@
         }
     });
 
-
 	// Everything below is to fix the annoying scroll that doesnt reset on navigation
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import type { NavigationTarget } from '@sveltejs/kit';

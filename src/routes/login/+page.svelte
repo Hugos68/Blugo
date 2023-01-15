@@ -8,10 +8,8 @@
             await applyAction(result);
             if (result.type==='redirect') {
                 const t: ToastSettings = {
-                    message: 'Success! Logging you in...',
-                    // Optional: Presets for primary | secondary | tertiary | warning
+                    message: 'Succesfully logged in!',
                     preset: 'success',
-                    // Optional: The auto-hide settings
                     autohide: true,
                     timeout: 3500,
                 };
@@ -20,9 +18,7 @@
             else if (result.type==='failure') {      
                 const t: ToastSettings = {
                     message: result.data?.message,
-                    // Optional: Presets for primary | secondary | tertiary | warning
                     preset: 'error',
-                    // Optional: The auto-hide settings
                     autohide: true,
                     timeout: 3500,
                 };

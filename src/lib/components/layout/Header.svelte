@@ -2,6 +2,7 @@
 	import { applyAction, enhance } from "$app/forms";
 	import { page } from "$app/stores";
 	import { AppBar, Avatar, drawerStore, LightSwitch, menu, toastStore, type DrawerSettings, type ToastSettings } from "@skeletonlabs/skeleton";
+	import type { SubmitFunction } from "@sveltejs/kit";
 	$: loggedIn = $page.data.session!==null;
 
     function openHamburger(): void {
@@ -13,7 +14,7 @@
         drawerStore.open(settings);
 	}
 
-    const submitLogout = () => {
+    const submitLogout: SubmitFunction = () => {
         return async ({ result }) => {        
             await applyAction(result);
             if (result.type==='redirect') {
@@ -58,9 +59,9 @@
             {#if loggedIn}
                 <span class="relative hidden md:block">
                     <button use:menu={{ menu: 'account' }}>
-                        <Avatar class="w-10" initials="{$page.data.session?.user.email?.at(0)}" />
+                        <Avatar border="on" class="w-10" initials="{$page.data.session?.user.email?.at(0)}" />
                     </button>
-                    <div class="p-4 bg-surface-400-500-token rounded-2xl w-max flex flex-col gap-6" data-menu="account">
+                    <div class="p-4 bg-surface-300-600-token rounded-[var(--theme-rounded-base)] flex flex-col" data-menu="account">
                         <a class="btn btn-ghost-secondary" href="/account">Account</a>
                         <form class="p-0" action="/logout" method="post" use:enhance={submitLogout}>
                             <button type="submit" class="w-full h-full btn btn-ghost-error">Logout</button>

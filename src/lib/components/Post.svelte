@@ -17,8 +17,12 @@
             <p>{formattedDate}</p>
         </div>
         <div class="flex gap-2">
-            <p>Up: {"10"}</p>
-            <p>Down: {"2"}</p>
+            <div class="bg-success-700 p-1">
+                <p>Up: {post.upvotes}</p>
+            </div>
+            <div class="bg-error-700 p-1">
+                <p>Down: {post.downvotes}</p>
+            </div>
         </div>
     </div>
 </main>
