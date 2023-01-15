@@ -52,9 +52,11 @@
         </nav>
         <nav class="flex flex-col items-end gap-4">
             <LightSwitch />
+            {#if loggedIn}
             <form class="p-0" action="/logout" method="post" use:enhance={submitLogout}>
                 <button type="submit" class="w-full h-full btn btn-ghost-error">Logout</button>
             </form>
+            {/if}
         </nav>
     </div>
 </Drawer>   
